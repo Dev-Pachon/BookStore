@@ -2,13 +2,13 @@ package dataStructures;
 
 import java.util.ArrayList;
 
-public class Hash<T, K extends Comparable<K>> implements IHash<T, K> {
+public class HashTable<T, K extends Comparable<K>> implements IHash<T, K> {
 
 	private NodeHash<T,K>[] hashM;
 	private int size;
 
 	@SuppressWarnings("unchecked")
-	public Hash(int size) {
+	public HashTable(int size) {
 		hashM = new NodeHash[size];
 		size = 0;
 	}
@@ -23,12 +23,13 @@ public class Hash<T, K extends Comparable<K>> implements IHash<T, K> {
 			NodeHash<T,K> actual = hashM[h];
 			if(actual.getKey().compareTo(k)==0) {
 				actual.setValue(t);
+			}else {
+				while(actual.getNext()!=null) {
+					actual = actual.getNext();
+				}
+				actual.setNext(new NodeHash<T,K>(t, k));
+				size ++;
 			}
-			while(actual.getNext()!=null) {
-				actual = actual.getNext();
-			}
-			actual.setNext(new NodeHash<T,K>(t, k));
-			size ++;
 		}
 	}
 
