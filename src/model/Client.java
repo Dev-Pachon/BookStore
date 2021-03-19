@@ -7,8 +7,8 @@ public class Client {
 	private int time;
 	
 	public Client() {
-		basket = new Stack()<Book>;
-		
+		basket = new Stack<Book>();
+		time = 0;
 	}
 	
 	public Stack<Book> getBasket() {
