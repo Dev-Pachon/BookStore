@@ -5,10 +5,12 @@ import dataStructures.Stack;
 public class Client {
 	private Stack<Book> basket;
 	private int time;
+	private int id;
 	
-	public Client() {
+	public Client(int id) {
 		basket = new Stack<Book>();
 		time = 0;
+		this.id = id;
 	}
 	
 	public Stack<Book> getBasket() {
