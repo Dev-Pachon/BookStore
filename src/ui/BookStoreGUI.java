@@ -15,9 +15,6 @@ public class BookStoreGUI {
     private AnchorPane mainPanel;
 
     @FXML
-    private TextField textCases;
-
-    @FXML
     private TextField numberOfBoxes;
 
     @FXML
@@ -25,7 +22,7 @@ public class BookStoreGUI {
 
     @FXML
     void next(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-contact.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("bookStore.fxml"));
 
         fxmlLoader.setController(this);
         Parent addContactPane = fxmlLoader.load();
