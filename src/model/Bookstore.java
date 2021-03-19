@@ -1,32 +1,84 @@
 package model;
 
+import java.util.Arrays;
+
 import dataStructures.HashTable;
 
 public class Bookstore {
 
-	private HashTable<String, Shelv> shelves;
+	//	private HashTable<String, Shelv> shelves;
+
+	private HashTable<Integer, Book> booksDataBase;
+
+	private HashTable<String, Client> clientsDataBase;
 
 	public Bookstore() {
-		shelves = new HashTable<>();
+		//		shelves = new HashTable<>();
+		booksDataBase = new HashTable<>();
 	}
 
-	public void addShelf(String id) {
-		shelves.add(id, new Shelv(id, 0));
+	//	public void addShelf(String id) {
+	//		shelves.add(id, new Shelv(id, 0));
+	//	}
+
+	public void addBook(String idShelf, int ISBNCod, double price, int num) {
+
+		Book newBook = new Book(ISBNCod, price, num, idShelf);
+
+		booksDataBase.add(ISBNCod, newBook);
 	}
 
-	public void addBook(String idShelf, String ISBNCod, double price, int num) {
+	public void addClient(String id) {
 
-		Shelv shelf = shelves.get(idShelf);
+		Client newClient = new Client();		
 
-		if(shelf !=null) {
-//			shelf.addBook(ISBNCod, price, num);
+		//add the client to the dataBase
+		clientsDataBase.add(id, newClient);
+
+	}
+
+	public void pickUpBooks(Client client,int[] ISBNCods, SortingType type) {
+		Book[] books = new Book[ISBNCods.length];
+
+		//put the available books into an array
+		int pos = -1;
+		for(int i = 0;i<ISBNCods.length;i++) {
+			Book temp =booksDataBase.get(ISBNCods[i]);
+			if(temp!=null) {
+				books[++pos] = temp;
+				temp.reduceNumBooks();
+				if(temp.getNumBooks()==0) {
+					booksDataBase.remove(temp.getISBNCod());
+				}
+			}
 		}
 
+		// If the quantity of books isn't equal to the length of the ISBN Cods -> books will be of the length just of the books available. 
+		if(pos < ISBNCods.length-1) {
+			books = Arrays.copyOf(books, pos); 
+		}
+
+		sortBooks(type, books);
+		//add the books to the stack
+		for(Book book : books)
+			client.addBook(book);
 	}
 
-	public Book[] sortBooks(SortingType type) {
-		
-		return null;
+	public Book[] sortBooks(SortingType type, Book[] clientBooks) {
+
+		switch (type) {
+		case COUNTINGSORT:
+
+			break;
+		case QUICKSORT:
+			quickSort(clientBooks, 0, clientBooks.length-1);
+			break;
+		case BUBBLESORT:
+			
+			break;
+		}
+
+		return clientBooks;
 	}
 
 	private<T extends Comparable<T>> int partition(T arr[], int low, int high) {
@@ -56,7 +108,7 @@ public class Bookstore {
 			quickSort(arr, pi+1, high); 
 		} 
 	}
-	
-	
+
+
 
 }
