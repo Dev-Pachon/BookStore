@@ -1,13 +1,17 @@
 package dataStructures;
 
-public interface IHash<T,K extends Comparable<K>> {
+public interface IHash<K,V> {
 	
-	public void insert(T t,K k);
-	
-	public T search(K k);
-	
-	public void delete(K k);
-	
-	public int size();
+	public int getSize();
+
+    public boolean isEmpty();
+
+    public int hash(K key);
+
+    public V get(K key);
+
+    public V remove(K key);
+
+    public void add(K key, V value);
 	
 }
