@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2bdc9b" height="407.0" layoutY="-1.0" opacity="0.57" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <Label layoutX="213.0" layoutY="44.0" text="Book Store">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="83.0" layoutY="182.0" text="No de cajeros" />
+      <Label layoutX="81.0" layoutY="225.0" text="No de estanterias" />
+      <Label layoutX="83.0" layoutY="141.0" text="casos de prueba" />
+      <TextField fx:id="textCases" layoutX="82.0" layoutY="158.0" />
+      <TextField fx:id="numberOfBoxes" layoutX="82.0" layoutY="199.0" />
+      <TextField fx:id="numberOfShelves" layoutX="82.0" layoutY="242.0" />
+      <Button layoutX="506.0" layoutY="351.0" mnemonicParsing="false" onAction="#next" text="Next" />
+   </children>
+</AnchorPane>
