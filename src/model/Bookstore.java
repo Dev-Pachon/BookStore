@@ -10,16 +10,20 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import dataStructures.HashTable;
+import dataStructures.Queue;
 
 public class Bookstore {
 
 	private HashTable<Integer, Book> booksDataBase;
 
 	private HashTable<String, Client> clientsDataBase;
+	
+	private Queue<Client> payQueue;
 
 	public Bookstore() {
 		booksDataBase = new HashTable<>();
 		clientsDataBase = new HashTable<>();
+		payQueue = new Queue<>();
 	}
 
 	public void addBook(String idShelf, int ISBNCod, double price, int num) {
@@ -32,7 +36,7 @@ public class Bookstore {
 	private void Simulate(File file, SortingType type) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		int numCajeros = Integer.parseInt(br.readLine());
-		//declaration of the cashers
+		//declaration of the cashiers
 		
 		
 		
@@ -82,6 +86,9 @@ public class Bookstore {
 		
 		
 		
+		
+		
+		br.close();
 	}
 
 	private void pickUpBooks(Client client,int[] ISBNCods, SortingType type) {
@@ -93,6 +100,7 @@ public class Bookstore {
 			Book temp =booksDataBase.get(ISBNCods[i]);
 			if(temp!=null) {
 				books[++pos] = temp;
+				temp.reduceNumBooks();
 				if(temp.getNumBooks()==0) {
 					booksDataBase.remove(temp.getISBNCod());
 				}
@@ -109,11 +117,18 @@ public class Bookstore {
 		for(Book book : books){
 			client.getBasket().push(book);
 			client.setTime(client.getTime()+1);
-			book.reduceNumBooks();
 		}
+
+		payQueue.
 	}
 
-	public Book[] sortBooks(SortingType type, Book[] clientBooks) {
+	public void section4(){
+
+
+
+	}
+
+	public void sortBooks(SortingType type, Book[] clientBooks) {
 
 		switch (type) {
 		case MERGESORT:
@@ -126,8 +141,6 @@ public class Bookstore {
 			bubbleSort(clientBooks);
 			break;
 		}
-
-		return clientBooks;
 	}
 
 	private<T extends Comparable<T>> int partition(T arr[], int low, int high) {
