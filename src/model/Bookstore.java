@@ -131,24 +131,24 @@ public class Bookstore {
 		    payQueue.offer(newClient);
         }
 
-		section4(client,newClient);
+		section4();
 
 
 
 
 	}
 
-	public void section4(Client client, Client newClient){
-	    Client clients[] = new Client[numCajeros];
+	public void section4(){
+	    Client cashiers[] = new Client[numCajeros];
         while (payQueue.isEmpty()){
-            for (int i = 0; i <clients.length ; i++) {
-                    payQueue.poll();
-                    clients[i] = client;
-                    clients[i].getBasket().pop();
-
-                if (clients[i].getBasket().isEmpty()){
-                    clients[i] = newClient;
-                }
+            for (int i = 0; i <cashiers.length ; i++) {
+            	if (cashiers[i] == null) {
+					cashiers[i] = payQueue.poll();
+					cashiers[i].getBasket().pop();
+				}else if (cashiers[i].getBasket().isEmpty()){
+            		cashiers[i] = null;
+            		cashiers[i] = payQueue.poll();
+				}
             }
 
         }
