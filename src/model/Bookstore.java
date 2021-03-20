@@ -20,6 +20,8 @@ public class Bookstore {
 	
 	private Queue<Client> payQueue;
 
+	private int numCajeros;
+
 	public Bookstore() {
 		booksDataBase = new HashTable<>();
 		clientsDataBase = new HashTable<>();
@@ -35,7 +37,7 @@ public class Bookstore {
 
 	private void Simulate(File file, SortingType type) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(file));
-		int numCajeros = Integer.parseInt(br.readLine());
+		numCajeros = Integer.parseInt(br.readLine());
 		//declaration of the cashiers
 		
 		
@@ -119,10 +121,39 @@ public class Bookstore {
 			client.setTime(client.getTime()+1);
 		}
 
-		payQueue.
+        Client newClient = new Client(client.getId(), client.getTime());
+
+		if (client.getTime() < newClient.getTime()){
+
+            payQueue.offer(client);
+
+        }else{
+		    payQueue.offer(newClient);
+        }
+
+		section4(client,newClient);
+
+
+
+
 	}
 
-	public void section4(){
+	public void section4(Client client, Client newClient){
+	    Client clients[] = new Client[numCajeros];
+        while (payQueue.isEmpty()){
+            for (int i = 0; i <clients.length ; i++) {
+                    payQueue.poll();
+                    clients[i] = client;
+                    clients[i].getBasket().pop();
+
+                if (clients[i].getBasket().isEmpty()){
+                    clients[i] = newClient;
+                }
+            }
+
+        }
+
+
 
 
 
