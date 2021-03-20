@@ -23,7 +23,7 @@ public class BookStoreGUI {
     private TextField labelURL;
 
     @FXML
-    private ComboBox<String> sortingComboBox;
+    private ComboBox<SortingType> sortingComboBox;
     
     @FXML
     private Button simulateButton;
@@ -32,6 +32,8 @@ public class BookStoreGUI {
     private Bookstore bookStore;
     
     private FileChooser fileChooser;
+    
+    private File file;
     
     public BookStoreGUI() {
     	bookStore = new Bookstore();
@@ -43,14 +45,14 @@ public class BookStoreGUI {
     	fileChooser.setTitle("Seleccionar datos");                
         fileChooser.getExtensionFilters().addAll( new FileChooser.ExtensionFilter("txt", "*.txt"));
         
-        sortingComboBox.getItems().add(SortingType.MERGESORT.toString());
-        sortingComboBox.getItems().add(SortingType.QUICKSORT.toString());
-        sortingComboBox.getItems().add(SortingType.BUBBLESORT.toString());
+        sortingComboBox.getItems().add(SortingType.MERGESORT);
+        sortingComboBox.getItems().add(SortingType.QUICKSORT);
+        sortingComboBox.getItems().add(SortingType.BUBBLESORT);
     }
     
     public void chooseFiles(ActionEvent event) {
     	
-        File file = fileChooser.showOpenDialog(mainPanel.getScene().getWindow());
+        file = fileChooser.showOpenDialog(mainPanel.getScene().getWindow());
         if (file != null) {
         	labelURL.setText(file.getAbsolutePath());
         	sortingComboBox.setDisable(false);
@@ -63,8 +65,22 @@ public class BookStoreGUI {
     }
     
     @FXML
-    public void simulate(ActionEvent event) {
+    public void simulate(ActionEvent event) throws IOException {
     	
+    	File newFile = fileChooser.showSaveDialog(mainPanel.getScene().getWindow());
+    	
+    	if (file != null) {
+        	bookStore.simulate(file, sortingComboBox.getSelectionModel().getSelectedItem());
+    		bookStore.saveResults(newFile);
+    		reset();
+        }
+    }
+    
+    private void reset() {
+    	sortingComboBox.setDisable(true);
+    	simulateButton.setDisable(true);
+    	labelURL.clear();
+    	sortingComboBox.getSelectionModel().clearSelection();
     }
 
 }

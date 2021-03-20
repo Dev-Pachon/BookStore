@@ -1,9 +1,11 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -35,7 +37,7 @@ public class Bookstore {
 		booksDataBase.add(ISBNCod, newBook);
 	}
 
-	private void Simulate(File file, SortingType type) throws IOException {
+	public void simulate(File file, SortingType type) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		numCajeros = Integer.parseInt(br.readLine());
 		//declaration of the cashiers
@@ -266,5 +268,13 @@ public class Bookstore {
 
 			merge(arr, l, m, r);
 		}
+	}
+
+	public void saveResults(File newFile) throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(newFile));
+		
+		
+		
+		bw.close();
 	}
 }
