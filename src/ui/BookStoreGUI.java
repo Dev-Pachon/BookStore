@@ -43,7 +43,7 @@ public class BookStoreGUI {
     	fileChooser.setTitle("Seleccionar datos");                
         fileChooser.getExtensionFilters().addAll( new FileChooser.ExtensionFilter("txt", "*.txt"));
         
-        sortingComboBox.getItems().add(SortingType.COUNTINGSORT.toString());
+        sortingComboBox.getItems().add(SortingType.MERGESORT.toString());
         sortingComboBox.getItems().add(SortingType.QUICKSORT.toString());
         sortingComboBox.getItems().add(SortingType.BUBBLESORT.toString());
     }

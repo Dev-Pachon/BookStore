@@ -5,9 +5,9 @@ import dataStructures.Stack;
 public class Client {
 	private Stack<Book> basket;
 	private int time;
-	private int id;
+	private String id;
 	
-	public Client(int id) {
+	public Client(String id, int time) {
 		basket = new Stack<Book>();
 		time = 0;
 		this.id = id;
@@ -17,8 +17,8 @@ public class Client {
 		return basket;
 	}
 	
-	public void setBasket(Stack<Book> basket) {
-		this.basket = basket;
+	public void addBook(Book book) {
+		basket.push(book);
 	}
 	
 	public int getTime() {
@@ -27,5 +27,9 @@ public class Client {
 	
 	public void setTime(int time) {
 		this.time = time;
+	}
+
+	public String getId() {
+		return id;
 	}
 }
